@@ -3,18 +3,17 @@
 //
 #ifndef ESP32_IOT_WEB_H
 #define ESP32_IOT_WEB_H
-#include "Arduino.h"
 #include "WiFi.h"
+#include "HTTPClient.h"
 #include "cJSON.h"
 #include <cstring>
-#include "http.h"
 
 typedef struct Weather {
     int code;
     int temperature;
     int state;
 } Weather;
-
+Weather Now;
 Weather GetWeather() {
     HTTPClient client;
     client.begin("https://api.seniverse.com/v3/weather/"

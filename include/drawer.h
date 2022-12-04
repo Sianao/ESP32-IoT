@@ -7,10 +7,10 @@
 
 
 #include "Arduino.h"
-#include "Arduino.h"
 #include <Wire.h>
 #include <Adafruit_SSD1306.h>
 #include "Image.h"
+#include "WiFi.h"
 
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
@@ -20,14 +20,28 @@
 #define OLED_DC     18
 #define OLED_CS     19
 #define OLED_RESET  5
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT,
-                         OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
-void DrawerInit(){
-    if (!display.begin(SSD1306_SWITCHCAPVCC)) {
-        Serial.println(("SSD1306 init failed"));
-        for (;;);
+////TwoWire *wr;
+//Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT,
+//                         OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
+#define SCREEN_WIDTH 128 // OLED display width, in pixels
+#define SCREEN_HEIGHT 64 // OLED display height, in pixels
+
+// Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
+#define OLED_RESET     -1 // Reset pin # (or -1 if sharing Arduino reset pin)
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+
+void DrawerInit() {
+
+//    if (!display.begin(SSD1306_SWITCHCAPVCC)) {
+//        Serial.println(("SSD1306 init failed"));
+//        for (;;);
+//    }
+    if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3c)) {
+        Serial.println(F("SSD1306 allocation failed"));
+        for(;;); // Don't proceed, loop forever
     }
 }
+
 void WaitCon() {
     display.clearDisplay();
     display.drawBitmap(32, 16, Duoyun, 32, 32, SSD1306_WHITE);

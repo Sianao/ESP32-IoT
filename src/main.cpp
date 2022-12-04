@@ -1,4 +1,3 @@
-
 #include "Arduino.h"
 #include "vlan.h"
 #include "drawer.h"
@@ -7,6 +6,7 @@
 
 void setup() {
     Serial.begin(115200);
+
     DrawerInit();
     WaitCon();
     WIFI_Setup();
