@@ -15,11 +15,11 @@
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
 
-#define OLED_MOSI   17
-#define OLED_CLK    16
-#define OLED_DC     18
-#define OLED_CS     19
-#define OLED_RESET  5
+//#define OLED_MOSI   17
+//#define OLED_CLK    16
+//#define OLED_DC     18
+//#define OLED_CS     19
+//#define OLED_RESET  5
 ////TwoWire *wr;
 //Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT,
 //                         OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
@@ -69,8 +69,11 @@ void Connected() {
     display.setCursor(33, 16 + 8 + 8);
     display.write(WiFi.localIP().toString().c_str());
     display.setCursor(33, 16 + 8 + 8 + 8);
-    display.write("SSID:");
-    display.write(WiFi.SSID().c_str());
+    display.write("DNS:");
+    display.setCursor(33, 16 + 8 + 8 + 8+8);
+
+    String dns=WiFi.dnsIP().toString();
+    display.write(dns.c_str());
     display.display();
 
 }

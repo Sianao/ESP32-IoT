@@ -9,11 +9,12 @@ void setup() {
 
     DrawerInit();
     WaitCon();
+    delay(2000);
     WIFI_Setup();
     Connected();
+    delay(2000);
     TimeSync();
-//    hw_timer_t *timer=timerBegin(0,80, true);
-    SH();
+    WeatherTicker();
 }
 
 void loop() {

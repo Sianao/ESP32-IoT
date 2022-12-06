@@ -8,21 +8,18 @@
 #include "web.h"
 #include "drawer.h"
 #include "HTTPClient.h"
+#include "Ticker.h"
 
-void SH() {
-    display.clearDisplay();
-    display.setCursor(0, 0);
-    display.setTextSize(1);
-    display.setTextColor(SSD1306_WHITE);
+Ticker WeaTick;
+
+void Callback() {
     Now = GetWeather();
-    if (Now.state == -1) {
-        display.printf("%d \n", Now.state);
-    } else {
-        display.printf("%d %d \n", Now.temperature, Now.code);
-    }
-    display.println("hello");
-    display.display();
-    delay(5000);
+}
+
+void WeatherTicker() {
+    Now = GetWeather();
+    WeaTick.attach(60 * 60, Callback);
+    WeaTick.active();
 }
 
 #endif //ESP32_IOT_HTTP_H
